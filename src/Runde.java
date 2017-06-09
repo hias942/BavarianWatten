@@ -17,7 +17,7 @@ public class Runde {
         Deck.generateDeck();
         List<Card> deck = Deck.getCards();
         if (deck.size() % spielers.size() == 0) {
-            while (deck.size() > deck.size()-spielers.size()*5)
+            while (deck.size() > 32-spielers.size()*5)
                 for (Spieler spieler : spielers) {
                     Set<Card> hand = spieler.getHand();
                     hand.add(deck.get(0));
