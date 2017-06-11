@@ -25,4 +25,13 @@ public class Card {
     public void setWert(Wert wert) {
         this.wert = wert;
     }
+
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "farbe=" + farbe +
+                ", wert=" + wert +
+                '}';
+    }
 }

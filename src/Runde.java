@@ -1,3 +1,5 @@
+import sun.security.provider.ConfigFile;
+
 import java.util.*;
 
 /**
@@ -7,6 +9,8 @@ public class Runde {
 
     private List<Spieler> spielers;
     private List<Stich> stiche;
+    private Farbe trumpf;
+    private Wert schlag;
 
     public Runde(List<Spieler> spielers) {
         this.spielers = spielers;
@@ -74,5 +78,51 @@ public class Runde {
 
         Collections.sort(spielers, spielerComparator);
     }
+    public void rundeSpielen(){
+        Stich stich= new Stich(spielers.get(0),this);
+        spielers.get(0).decideSchlag(this);
+        spielers.get(3).decideTrumpf(this);
+        while(stiche.size()<5){
+            for(Spieler spieler:spielers){
+                spieler.karteSpielen(stich);
+            }
+            stich.calculateGewinner();
+            stiche.add(stich);
+            sortSpielersByGewinner(stich.getGewinner());
+            stich= new Stich(stich.getGewinner(),this);
+        }
+    }
 
+    private void sortSpielersByGewinner(Spieler gewinner) {
+
+        List<Spieler> spielersList=new ArrayList<>();
+        spielersList.addAll(spielers);
+
+
+       int index= spielersList.indexOf(gewinner);
+       int itts=4-index;
+       for(int i=0;i<itts&&itts<4;i++){
+           Spieler letzter=spielersList.get(3);
+           spielersList.remove(3);
+           spielersList.add(0,letzter);
+
+       }
+       spielers=spielersList;
+    }
+
+    public Farbe getTrumpf() {
+        return trumpf;
+    }
+
+    public void setTrumpf(Farbe trumpf) {
+        this.trumpf = trumpf;
+    }
+
+    public Wert getSchlag() {
+        return schlag;
+    }
+
+    public void setSchlag(Wert schlag) {
+        this.schlag = schlag;
+    }
 }
