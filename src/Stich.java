@@ -9,7 +9,7 @@ import java.util.Map;
  * Created by Benedikt on 09.06.2017.
  */
 public class Stich {
-    private Map<Card, Spieler> cardMap;
+    private List<Card> cardList;
     private Spieler gewinner;
     private Spieler aufgebender;
     private Runde runde;
@@ -18,25 +18,21 @@ public class Stich {
     public Stich(Spieler aufgebender, Runde runde) {
         this.runde = runde;
         this.aufgebender = aufgebender;
-        cardMap = new HashMap<>();
+        cardList = new ArrayList<>();
     }
 
 
     public void calculateGewinner() {
-        List<Card> cards = new ArrayList<>();
-        for (Map.Entry<Card, Spieler> entry : cardMap.entrySet()) {
-            cards.add(entry.getKey());
-        }
-        Card bestCard=getWinnerByRunde(cards);
-        gewinner= cardMap.get(bestCard);
+        Card bestCard=getWinnerByRunde(cardList);
+        gewinner= bestCard.getSpieler();
     }
 
-    public Map<Card, Spieler> getCardMap() {
-        return cardMap;
+    public List<Card> getCardList() {
+        return cardList;
     }
 
-    public void setCardMap(Map<Card, Spieler> cardMap) {
-        this.cardMap = cardMap;
+    public void setCardList(List<Card> cardList) {
+        this.cardList = cardList;
     }
 
     public Spieler getGewinner() {

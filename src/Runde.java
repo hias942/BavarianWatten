@@ -1,6 +1,7 @@
-import sun.security.provider.ConfigFile;
-
+import javax.swing.*;
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * Created by Benedikt on 09.06.2017.
@@ -24,6 +25,7 @@ public class Runde {
             while (deck.size() > 32-spielers.size()*5)
                 for (Spieler spieler : spielers) {
                     Set<Card> hand = spieler.getHand();
+                    deck.get(0).setSpieler(spieler);
                     hand.add(deck.get(0));
                     spieler.setHand(hand);
                     deck.remove(0);
@@ -32,15 +34,13 @@ public class Runde {
                 }
 
         }
-        spielers.get(spielers.size() - 1).setDealer(false);
-        spielers.get(0).setDealer(true);
-
-        nextTurn();
 
         return spielers;
     }
 
     public void nextTurn() {
+        spielers.get(spielers.size() - 1).setDealer(false);
+        spielers.get(0).setDealer(true);
         for (Spieler spieler : spielers) {
             if (spieler.getPosition() == 1) {
                 spieler.setPosition(spielers.size());
@@ -81,14 +81,35 @@ public class Runde {
     public void rundeSpielen(){
         Stich stich= new Stich(spielers.get(0),this);
         spielers.get(0).decideSchlag(this);
-        spielers.get(3).decideTrumpf(this);
+        spielers.get(spielers.size()-1).decideTrumpf(this);
         while(stiche.size()<5){
             for(Spieler spieler:spielers){
-                spieler.karteSpielen(stich);
+                spieler.karteSpielenLassen(stich);
             }
             stich.calculateGewinner();
             stiche.add(stich);
             sortSpielersByGewinner(stich.getGewinner());
+
+
+            JPopupMenu jPopupMenu=new JPopupMenu("Gewinner");
+
+
+            jPopupMenu.add("Gewinner ist: "+stich.getGewinner().getName() );
+
+            Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+            jPopupMenu.setLocation(dim.width/2-jPopupMenu.getSize().width/2, dim.height/2-jPopupMenu.getSize().height/2);
+            jPopupMenu.setVisible(true);
+            jPopupMenu.pack();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            jPopupMenu.setVisible(false);
+
+
+
+
             stich= new Stich(stich.getGewinner(),this);
         }
     }
@@ -100,8 +121,8 @@ public class Runde {
 
 
        int index= spielersList.indexOf(gewinner);
-       int itts=4-index;
-       for(int i=0;i<itts&&itts<4;i++){
+       int itts=spielers.size()-index;
+       for(int i=0;i<itts&&itts<spielers.size();i++){
            Spieler letzter=spielersList.get(3);
            spielersList.remove(3);
            spielersList.add(0,letzter);

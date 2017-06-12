@@ -9,7 +9,10 @@ public class Spiel {
     public void playGame(){
 
         Runde runde= new Runde( Arrays.asList(new Spieler(false,1,"Spieler 1"),new Spieler(false,2,"Spieler 2"),new Spieler(false,3,"Spieler 3"),new Spieler(true,4,"Spieler 4")));
-        List<Spieler> nextRundeSorted= runde.dealCards();
+        runde.dealCards();
+        runde.rundeSpielen();
+        runde.nextTurn();
+        runde.dealCards();
         runde.rundeSpielen();
 
         //Rundenstatistiken ausgeben
@@ -23,7 +26,7 @@ public class Spiel {
             System.out.println("Stich N. "+itt);
             System.out.println("Aufgebender: "+stich.getAufgebender());
             System.out.println("Gewinner: "+stich.getGewinner());
-            System.out.println("Gespielte Karten: "+ stich.getCardMap().entrySet());
+            System.out.println("Gespielte Karten: "+ stich.getCardList());
 
         }
 
