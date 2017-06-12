@@ -30,7 +30,7 @@ public class Spieler{
         handGui.initGui(this);
         while(isDeciding){
             try {
-                Thread.sleep(2000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                //ignore
             }

@@ -21,6 +21,7 @@ public class HandGui {
         for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
             if ("Nimbus".equals(info.getName())) {
                 try {
+
                     UIManager.setLookAndFeel(info.getClassName());
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -47,6 +48,7 @@ public class HandGui {
             jListHand.setSelectedIndex(0);
         }
 
+
         JButton playButton=new JButton("Spielen");
         playButton.setBackground(Color.RED);
         playButton.setForeground(Color.BLUE);
@@ -62,6 +64,7 @@ public class HandGui {
         JSeparator jSeparator=new JSeparator();
         jSeparator.setOrientation(SwingConstants.VERTICAL);
 
+        frame.getRootPane().setDefaultButton(playButton);
         frame.getContentPane().add(playButton,BorderLayout.PAGE_END);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);

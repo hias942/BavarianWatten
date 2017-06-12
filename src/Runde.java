@@ -89,27 +89,7 @@ public class Runde {
             stich.calculateGewinner();
             stiche.add(stich);
             sortSpielersByGewinner(stich.getGewinner());
-
-
-            JPopupMenu jPopupMenu=new JPopupMenu("Gewinner");
-
-
-            jPopupMenu.add("Gewinner ist: "+stich.getGewinner().getName() );
-
-            Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-            jPopupMenu.setLocation(dim.width/2-jPopupMenu.getSize().width/2, dim.height/2-jPopupMenu.getSize().height/2);
-            jPopupMenu.setVisible(true);
-            jPopupMenu.pack();
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            jPopupMenu.setVisible(false);
-
-
-
-
+            JOptionPane.showInputDialog(null, "Gewinner ist: "+stich.getGewinner().getName() , null);
             stich= new Stich(stich.getGewinner(),this);
         }
     }

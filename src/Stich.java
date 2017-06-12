@@ -134,4 +134,11 @@ public class Stich {
         return 0;
     }
 
+
+    @Override
+    public String toString() {
+        return
+                "Karten: " + cardList +
+                ", Gewinner: " + gewinner.getName();
+    }
 }
