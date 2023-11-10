@@ -4,6 +4,7 @@
 public class Card {
     private Farbe farbe;
     private Wert wert;
+    private Spieler spieler;
 
     public Card(Farbe farbe, Wert wert) {
         this.farbe = farbe;
@@ -24,5 +25,18 @@ public class Card {
 
     public void setWert(Wert wert) {
         this.wert = wert;
+    }
+
+    public Spieler getSpieler() {
+        return spieler;
+    }
+
+    public void setSpieler(Spieler spieler) {
+        this.spieler = spieler;
+    }
+
+    @Override
+    public String toString() {
+        return farbe +" "+ wert;
     }
 }

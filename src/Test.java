@@ -8,22 +8,10 @@ public class Test {
 
     public static void main(String... args){
 
-       Runde runde= new Runde( Arrays.asList(new Spieler(false,1),new Spieler(false,2),new Spieler(false,3),new Spieler(true,4)));
-       List<Spieler> nextRundeSorted= runde.dealCards();
-        int itt=1;
-       while(runde.getSpielers().get(0).getHand().size()>0){
-          Stich stich= new Stich(itt);
-
-           itt++;
-           for(Spieler spieler:runde.getSpielers()){
-               spieler.karteSpielen(stich);
-
-           }
-           runde.getStiche().add(stich);
-           if(itt==5)
-               itt=1;
-       }
+       new Spiel();
     }
 
 
+
 }
+
